@@ -1,3 +1,3 @@
 <?php
-echo " 7 is coming";
+echo "the 7 is coming";
 ?>
