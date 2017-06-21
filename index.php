@@ -1,11 +1,6 @@
 <style>
 body{
-    background-image: linear-gradient(rgb(255, 255, 255) ,rgb(220, 220, 220));
-    background-position-x: initial;
-    background-position-y: initial;
-    background-size: initial;
-    background-repeat-x: initial;
-    background-repeat-y: initial;
+    background: linear-gradient(to bottom, rgba(90, 0, 0,.7) 0% ,rgba(255, 255, 255, .2) 100%), url(assets/img/wall.png) 50% 50% / 100% no-repeat;
     background-attachment: initial;
     background-origin: initial;
     background-clip: initial;
