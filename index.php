@@ -14,7 +14,7 @@ body{
 </style>
 
 <div style="height:100%;width:100vw;position:relative;display:table;vertical-align:middle;">
-	<div style="max-width:300px;width:50vw;position:relative;display:table-cell;vertical-align:middle;text-align:center;">
-		<img src='assets/img/se7en-logo.png' width="100%" style="max-width: 300px;" />
+	<div style="max-width:500px;width:50vw;position:relative;display:table-cell;vertical-align:middle;text-align:center;">
+		<img src='assets/img/se7en-logo.png' width="100%" style="min-width: 500px;max-width: 500px;" />
 	</div>
 </div>
