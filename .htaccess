@@ -1,0 +1,8 @@
+#Routing
+RewriteEngine On
+#change for production!
+RewriteBase /Se7enTech/dev/web.Se7enTech/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.+)$ index.php?uri=$1 [QSA,L]

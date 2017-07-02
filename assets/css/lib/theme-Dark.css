@@ -134,12 +134,29 @@ h6 {
   width: 50%;
   height: 100vh;
   overflow: hidden; }
+  
+  #leftSideShort {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 25%;
+  height: 100vh;
+  overflow: hidden; }
 
 #rightSide {
   position: absolute;
   top: 0;
   left: 50%;
   width: 50%;
+  height: 100%;
+  overflow-x: hidden;
+  background: #fff; }
+  
+#rightSideShort {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  width: 75%;
   height: 100%;
   overflow-x: hidden;
   background: #fff; }
@@ -194,7 +211,7 @@ h6 {
   width: 100%;
   font-size: 1em;
   padding-left: 10%;
-  z-index: 2;
+  z-index: 1;
   color: #fff; }
   .social_icons li, #homeCenter .social_icons li {
     display: inline; }
@@ -352,6 +369,19 @@ h6 {
       background: #121619;
       bottom: -70px;
       height: 70px; }
+    .blog .project .item .caption {
+      position: absolute;
+      width: calc(100% - 15px);
+      color: #fff;
+      overflow: hidden;
+      -webkit-transition: 0.3s;
+      -ms-transition: 0.3s;
+      -moz-transition: 0.3s;
+      -o-transition: 0.3s;
+      transition: 0.3s;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 80%);
+      bottom: 0px;
+      height: 70px; }
       .project .item .caption .photo-details {
         position: absolute;
         padding: 0 15px;
@@ -361,6 +391,21 @@ h6 {
         -moz-transform: translateY(100%);
         -o-transform: translateY(100%);
         transform: translateY(100%);
+        -webkit-transition: 0.3s;
+        -ms-transition: 0.3s;
+        -moz-transition: 0.3s;
+        -o-transition: 0.3s;
+        transition: 0.3s; }
+        
+      .blog .project .item .caption .photo-details {
+        position: absolute;
+        padding: 0 15px;
+        bottom: 10px;
+        -webkit-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -o-transform: translateY(0%);
+        transform: translateY(0%);
         -webkit-transition: 0.3s;
         -ms-transition: 0.3s;
         -moz-transition: 0.3s;
@@ -397,6 +442,13 @@ h6 {
       -moz-transform: translateY(-70px);
       -o-transform: translateY(-70px);
       transform: translateY(-70px); }
+      
+    .blog .project .item:hover .caption {
+      -webkit-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+      -moz-transform: translateY(0px);
+      -o-transform: translateY(0px);
+      transform: translateY(0px); }
     .project .item img {
       width: 100%; }
   .project .project_info {
@@ -431,10 +483,13 @@ h6 {
           -o-transform: translateX(0);
           transform: translateX(0);
           opacity: 1; }
+      .blog .project .project_info li img {
+            width: 100%; top:0px;position: relative; }
       .project .project_info li img {
-        width: 100%; }
+            width: 100%; top: 0vh;
+    		position: relative; }
       .project .project_info li .project_content {
-        padding: 10%; }
+        padding: 5% 10%; }
   .project.show {
     -webkit-transition: 0.3s;
     -ms-transition: 0.3s;
@@ -1430,8 +1485,21 @@ img {
     top: 0;
     left: 0;
     width: 100%; }
+    
+  #leftSideShort {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%; }
 
   #rightSide {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
+  #rightSideShort {
     position: relative;
     top: 0;
     left: 0;
@@ -1482,8 +1550,26 @@ img {
     width: 100%;
     height: 100%;
     overflow: hidden; }
+    
+  #leftSideShort {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; }
 
   #rightSide {
+    position: relative;
+    top: 0;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    background: transparent;
+    overflow-x: hidden; }
+    
+  #rightSideShort {
     position: relative;
     top: 0;
     left: 0%;
@@ -1592,7 +1678,7 @@ img {
 /* Portfolio ................... */
 /* ------------------------------------- */
 .item .caption span {
-  color: #fff !important; }
+  color: #fff; }
 
 /* ------------------------------------- */
 /* Twitter Feeds ................... */
