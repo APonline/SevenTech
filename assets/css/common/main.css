@@ -14,6 +14,7 @@
 /********************/	
 /*MAIN PANEL*/
 	#home{ background:linear-gradient(to bottom, rgba(180, 180, 180, 0.9) 0%, rgba(0, 0, 0, 0.1) 100%), url('../../img/banner1.png') 50% 50% / cover no-repeat; }
+	.productsBanner{ background:linear-gradient(to bottom, rgba(180, 180, 180, 0.9) 0%, rgba(0, 0, 0, 0.1) 100%), url('../../img/blog5.JPG') 50% 50% / cover no-repeat!important; }
 	.grid { top: 0px;width: 100vw;height: 100vh;position: fixed;box-shadow: rgb(0, 0, 0) 0px 0px 60px inset;background-image: url('../../img/gridtile.png'); }
 	.accent-title{ font-weight:bold; text-transform: uppercase; }
 	.main-logo { position: absolute; top: 16%; max-width: 300px; left: 10%; }
@@ -48,7 +49,7 @@
 
 /*SMALL*/
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
-	#leftSide, #leftSideShort {text-align:center;}
+	#leftSide, #leftSideShort, #leftSideTop {text-align:center;}
 	.main-logo { position: relative;max-width: 300px;left: initial;top: initial;clear: both;margin-top: 10%; }
 	.h-content {position: relative;z-index: 0;top: 10vh;}
 	.social_icons, #homeCenter .social_icons{ padding-left:initial; }

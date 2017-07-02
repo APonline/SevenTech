@@ -25,6 +25,12 @@ $route->add("/blog", function() {
 	include('view/site/blog.php');
 });
 
+//Products
+$route->add("/products", function() {
+	include('template/panel_top.php');
+	include('view/site/products.php');
+});
+
 //Contact
 $route->add("/contact", function() {
 	include('template/panel_large.php');

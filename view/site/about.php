@@ -15,38 +15,42 @@ echo "
 	</form>
 </div>-->
 <div class='about'>
-	<h2>Get started fast with one of our unique, pre-built concepts.</h2>
+	<h2>Taking DIY to the next level.</h2>
 	<p>
-	  Customers love our block-based approach to template building,
-	  it makes assembling beautiful pages fast and enjoyable, leaving
-	   more time to craft your perfect layout. love our block-based
-	  approach to template building, it makes assembling beautiful pages
-	  fast and enjoyable, leaving more time to craft your perfect layout.
+	  For the longest time I've always wanted to know what was under the hood of things. 
+	  Especially when it came to what's in my guitar rig. It's been more than 15 years 
+	  of playing guitar, the past few I wanted to take it to the next level. Having a proper
+	  pedalboard, quality pedals, and the right character was important! It took a lot of good
+	  and fun research, which finally led to embracing the idea of really getting to know 
+	  my pedals. Now I find myself sometimes curiously up until 3am working on more and more
+	  pedals. 
+	  What was an interest is now maybe an obession. So I'd like to share that Passion by taking in 
+	  orders and some creations for fellow guitar and effects junkies.
 	</p>
 
 	<p>
-	  Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit.
+	  My name is Andrew, and I simply love bringing a great pedal and pedalboards to life.
 	</p>
 
 	<div class='service row'>
 	  <div class='feature col-sm-3 col-xs-3'>
-		<i class='ion-heart'></i>
+		<i class='ion-ionic'></i>
 		<h6>SIMPLE</h6>
 	  </div>
 
 	  <div class='feature col-sm-3 col-xs-3'>
-		<i class='ion-erlenmeyer-flask'></i>
+		<i class='ion-android-color-palette'></i>
 		<h6>CREATIVE</h6>
 	  </div>
 
 	  <div class='feature col-sm-3 col-xs-3'>
-		<i class='ion-waterdrop'></i>
-		<h6>SMOOTH</h6>
+		<i class='ion-power'></i>
+		<h6>POWERFUL</h6>
 	  </div>
 
 	  <div class='feature col-sm-3 col-xs-3'>
-		<i class='ion-code'></i>
-		<h6>STABLE</h6>
+		<i class='ion-levels'></i>
+		<h6>CUSTOM</h6>
 	  </div>
 	</div>
 </div>

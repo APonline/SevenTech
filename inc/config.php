@@ -65,6 +65,7 @@ if(__DIR__ == "/home/teamgit/its.matthewsullivan.media/inc") $developmentPath = 
 	$nav = array();
 		$nav[] = "about";
 		$nav[] = "blog";
+		$nav[] = "products";
 		$nav[] = "contact";
 
 
