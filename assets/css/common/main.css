@@ -1,4 +1,10 @@
 /*****************/	
+/*reset*/
+	h5{font-weight:bold;}
+/*reset*/
+/*****************/
+
+/*****************/	
 /*COLOURS*/
 	.black{color:#000!important;}
 	.red{color:#b50000!important;}
@@ -46,6 +52,24 @@
 
 .projectImgContainer{overflow:hidden;max-height: 50vh;}
 .blog .projectImgContainer{overflow:hidden;height: auto;}
+
+.project_content{}
+	.project_content ul{width:100%;height:auto;position:relative;display:block;}
+	.project_content ul li{display:block!important;clear:right;}
+	.project_content ul li a{color:#b50000!important;}
+
+
+
+/********************/	
+/*GALLERY*/
+	.gallerySet{position:relative;display:block;clear:both;margin:0 auto;margin-bottom: 25px;border: 1px solid #8a8a8a;min-height:100px;height:auto;width:100%;clear:both;}
+	.gallerySet ul{position:relative;display:block;width:100%;height:100px;clear:both;}
+	.gallerySet ul li{width: 100px!important;height: 100px!important;position: relative;display: inline-block!important;float: left;cursor: pointer;border: 5px solid #fff;border-right: none;overflow: hidden;}
+	
+		.gallerySet ul li a figure img{width: 220%!important;height: 220%!important;max-width: 1000%!important;max-height: 1000%!important;left: -50%!important;position: relative;}
+/*GALLERY*/
+/********************/
+
 
 /*SMALL*/
 @media only screen and (min-width: 0px) and (max-width: 1024px) {

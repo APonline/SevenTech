@@ -27,40 +27,42 @@ if($u=="auto-report-daily"||$u=="auto-report-monthly"){
  */
 ini_set("display_errors", "on");
 
-/****************/
+//Admin
+$route->add("/admin", function() {
+	/****************/
 	/*LOGIN*/
-/****************/
-//require_once(__DIR__ . "/../model/class.database.php");
-/*require __DIR__ . "/../model/LS.php";
+	/****************/
+	//require_once(__DIR__ . "/../model/class.database.php");
+	require __DIR__ . "/../model/class.login.php";
 
-//Development path for my machine.
-$developmentPath = "/TraceLogix/dev/web.TraceLogix";
-if(__DIR__ == "/home/teamgit/its.matthewsullivan.media/inc") $developmentPath = "";
+	//Development path for my machine.
 
-\Fr\LS::config(array(
-  "db" => array(
-    "host" => "dev.its.matthewsullivan.media",
-    "port" => 3306,
-    "username" => "socreativeteam",
-    "password" => "sM5AayLMvkXPTv2XGu",
-    "name" => "its_tracelogix",
-    "table" => "users"
-  ),
-  "features" => array(
-    "auto_init" => true
-  ),
-  "pages" => array(
-    "no_login" => array(
-      "/",
-      $developmentPath . "/services/reset.php"
-    ),
-    "login_page" => $developmentPath . "/login",
-    "home_page" =>  $developmentPath . "/dashboard"
-  )
-));*/
-/****************/
-	/*LOGIN*/
-/****************/
+	\Fr\LS::config(array(
+	  "db" => array(
+		"host" => "mysql.se7en-tech.com",
+		"port" => 3306,
+		"username" => "andphi22",
+		"password" => "Milkmilk1!",
+		"name" => "se7entecheffects",
+		"table" => "users"
+	  ),
+	  "features" => array(
+		"auto_init" => true
+	  ),
+	  "pages" => array(
+		"no_login" => array(
+		  "/",
+		  "/services/reset.php"
+		),
+		"login_page" => "template/login",
+		"home_page" => "view/admin/dashboard"
+	  )
+	));
+	include('template/login.php');
+	/****************/
+		/*LOGIN*/
+	/****************/
+});
 	
 	$nav = array();
 		$nav[] = "about";

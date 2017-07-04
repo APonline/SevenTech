@@ -238,7 +238,7 @@ h6 {
       display: inline-block;
       padding: 15px; }
       .social_icons li i:hover, #homeCenter .social_icons li i:hover {
-        color: black;
+        color: #b50000;
         transition: .1s; }
 
 #homeCenter .social_icons {
@@ -362,9 +362,14 @@ h6 {
 /* ------------------------------------- */
 .project, .portfolio, .swipe_portfolio {
   position: relative;
-  padding: 15px 7.5px; }
+  padding: 15px 7.5px; 
+  /*height: calc(100% - 288px);*/
+  }
+.blog {
+  position: relative;
+  height: calc(100% - 340px);}
 
-.project {
+.project, .blog {
   background: #f5f5f5; }
   .project .item {
     padding-left: 7.5px;

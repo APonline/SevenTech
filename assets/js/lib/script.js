@@ -198,7 +198,7 @@ $( document ).ready(function() {
 
 
 
-      $(navigation).siblings(".project_info").children('li'+eventTarget).find('img').attr('src', imgSrc);
+      $(navigation).siblings(".project_info").children('li'+eventTarget).find('#activeHeader').attr('src', imgSrc);
 
     }
 
@@ -218,7 +218,7 @@ $( document ).ready(function() {
 
       var projectInfo = $(projectNavigation).siblings(".project_info");
 
-      var projectImg = $('<div class="projectImgContainer"><img></div>');
+      var projectImg = $('<div class="projectImgContainer"><img id="activeHeader"></div>');
 
       var closeButton = $('<a href="#close" class="close"><i class="ion-android-close"></i></a>');
 
@@ -276,7 +276,7 @@ $( document ).ready(function() {
 
 
 
-  $('.portfolio').magnificPopup({
+  $('.gallerySet').magnificPopup({
 
     delegate: 'a', // child items selector, by clicking on it popup will open
 
