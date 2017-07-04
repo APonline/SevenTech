@@ -366,8 +366,7 @@ h6 {
   /*height: calc(100% - 288px);*/
   }
 .blog {
-  position: relative;
-  height: calc(100% - 340px);}
+  position: relative;}
 
 .project, .blog {
   background: #f5f5f5; }
