@@ -1,4 +1,18 @@
 <?php
+echo "
+<div id='leftSideTop'>
+  <div class='grid'></div>
+  <div id='home' class='gradient'>
+  <div class='h-content' style='top: 15vh;text-align: center;font-weight: bold;'>
+		<h1 style='font-weight: bold;'>Admin Area</h1>
+	</div>
+  </div>
+</div>
+<div id='rightSideTop'>
+";
+?>
+
+<?php
 /*
  * Only the config show be required at this level. Everything else should be below our isset and post checks.
  */
@@ -37,7 +51,7 @@ require_once("template/header.php");
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-4"></div>
-      <div class="col-sm-6 col-md-6 col-lg-4">
+      <div class="col-sm-6 col-md-6 col-lg-4 loginBox">
           <?php
 
               $enable = "";
@@ -79,4 +93,38 @@ require_once("template/header.php");
       <div class="col-sm-3 col-md-3 col-lg-4"></div>
   </div>
 </div>
-<?php require_once("template/footer.php"); ?>
+
+
+
+<?php
+$dir = $GLOBALS['dir'];
+
+echo "
+	  <div class='screen'></div>
+	  <footer>
+		<p class='uppercase'>© Se<span style='font-size: 20px;' class='red'>7</span>en Tech | <span class='gray'>Guitar effects</span></p>
+		<div class='drag'>
+		  <i class='up ion-arrow-up-c'></i>
+		</div>
+	  </footer>
+
+	</section>
+      <script src='".$dir."/assets/js/lib/jquery-1.11.3.min.js'></script>
+      <script src='".$dir."/assets/js/lib/bootstrap.min.js'></script>
+      <script src='".$dir."/assets/js/lib/animsition.min.js'></script>
+      <script src='".$dir."/assets/js/lib/jquery.magnific-popup.min.js'></script>
+      <script src='".$dir."/assets/js/lib/jquery.countdown.min.js'></script>
+      <script src='".$dir."/assets/js/lib/twitterFetcher_min.js'></script>
+      <script src='".$dir."/assets/js/lib/masonry.pkgd.min.js'></script>
+      <script src='".$dir."/assets/js/lib/imagesloaded.pkgd.min.js'></script>
+      <script src='".$dir."/assets/js/lib/jquery.flexslider-min.js'></script>
+      <script src='".$dir."/assets/js/lib/photoswipe.min.js'></script>
+      <script src='".$dir."/assets/js/lib/photoswipe-ui-default.min.js'></script>
+      <script src='".$dir."/assets/js/lib/jqinstapics.min.js'></script>
+      <script src='".$dir."/assets/js/lib/script.js'></script>
+      <script src='".$dir."/assets/js/common/main.js'></script>
+  </body>
+</html>
+";
+
+?>

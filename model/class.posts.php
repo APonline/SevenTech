@@ -12,148 +12,311 @@ class Posts
 	}
 
 
+	/**
+	  * Get Featured Home Page content
+	  *
+	  *
+	  **/
+	  public function getCategories(){
+	  	try{
+				$queryInfo = "SELECT * FROM categories";
 
-/**
-  * Get Featured Home Page content
-  *
-  *
-  **/
-  public function getCategories($cat){
-  	try{
-		$queryInfo = "SELECT * FROM categories WHERE category = :category LIMIT 1";
+				$category = $this->conn->prepare($queryInfo);
 
-		$category = $this->conn->prepare($queryInfo);
+				$category->setFetchMode(PDO::FETCH_ASSOC);
+				$category->execute();
+				$category = $category->fetchAll();
 
-		$category->setFetchMode(PDO::FETCH_ASSOC);
-		$category->bindParam(":category", $cat, PDO::PARAM_INT);
-		$category->execute();
-		$category = $category->fetchAll();
-
-		if(empty($category)){
-			return;
-		}
-		
-		$category = $category[0]['id'];
-		
-		return $category;
-
-	}catch(PDOException $e){
-		echo $e->getMessage();
-	}
-  }
-/**
-  * Get Featured Home Page content
-  *
-  *
-  **/
-  public function getContent($category){
-  	try{
-  		$category = $this->getCategories($category);
-
-		$queryInfo = "SELECT * FROM posts WHERE category = :category && active = 1 ORDER BY ordering ASC LIMIT 7";
-
-		$featured = $this->conn->prepare($queryInfo);
-
-		$featured->setFetchMode(PDO::FETCH_ASSOC);
-		$featured->bindParam(":category", $category, PDO::PARAM_INT);
-		$featured->execute();
-		$featured = $featured->fetchAll();
-
-		if(empty($featured)){
-			return;
-		}
-
-		$featuredList= array();
-
-		for($i=0; $i<count($featured); $i++){
-			$mediaList = $this->getMedia($featured[$i]['media']);
-			
-			foreach($mediaList as $mediaItem){
-				if($mediaItem['main']==1){
-					$mainMedia = $mediaItem['content'];
+				if(empty($category)){
+					return;
 				}
+
+				$categories= array();
+
+				foreach($category as $cat){
+					$categories[] = array('id'=>$cat['id'],'name'=>$cat['category']);
+				}
+
+				return json_encode($categories);
+
+			}catch(PDOException $e){
+				echo $e->getMessage();
+			}
+	  }
+
+/**
+  * Get Featured Home Page content
+  *
+  *
+  **/
+  public function getCategory($cat){
+  	try{
+			$queryInfo = "SELECT * FROM categories WHERE category = :category LIMIT 1";
+
+			$category = $this->conn->prepare($queryInfo);
+
+			$category->setFetchMode(PDO::FETCH_ASSOC);
+			$category->bindParam(":category", $cat, PDO::PARAM_INT);
+			$category->execute();
+			$category = $category->fetchAll();
+
+			if(empty($category)){
+				return;
 			}
 
-			$featuredInfo = array(
-				'id' => $featured[$i]['id'],
-				'category' => $featured[$i]['category'],
-				'topic' => $featured[$i]['topic'],
-				'title' => $featured[$i]['title'],
-				'dated' => $featured[$i]['dated'],
-				'content' => $featured[$i]['content'],
-				'media_main' => $mainMedia,
-				'media' => $mediaList,
-				'sources' => $featured[$i]['sources'],
-				'attachment' => $featured[$i]['attachment'],
-				'likes' => $featured[$i]['likes'],
-				'shares' => $featured[$i]['shares']
-			);
+			$category = $category[0]['id'];
 
-			$featuredList[] = $featuredInfo;
+			return $category;
+
+		}catch(PDOException $e){
+			echo $e->getMessage();
 		}
-
-		return json_encode($featuredList);
-
-	}catch(PDOException $e){
-		echo $e->getMessage();
-	}
   }
-  
+
+/**
+  * Get Featured Home Page content
+  *
+  *
+  **/
+  public function getContent($category,$dir){
+  	try{
+			if($category!="Posts"&&$dir!="admin"){
+				//SITE GET SINGLE CATEGORY
+				$category = $this->getCategory($category);
+				$queryInfo = "SELECT * FROM posts WHERE category = :category && active = 1 ORDER BY ordering ASC";
+
+				$featured = $this->conn->prepare($queryInfo);
+				$featured->setFetchMode(PDO::FETCH_ASSOC);
+				$featured->bindParam(":category", $category, PDO::PARAM_INT);
+				$featured->execute();
+				$featured = $featured->fetchAll();
+			}elseif($category!="Posts"&&$dir=="admin"){
+				//ADMIN GET SINGLE CATEGORY
+				$category = $this->getCategory($category);
+				$queryInfo = "SELECT * FROM posts WHERE category = :category ORDER BY ordering ASC";
+
+				$featured = $this->conn->prepare($queryInfo);
+				$featured->setFetchMode(PDO::FETCH_ASSOC);
+				$featured->bindParam(":category", $category, PDO::PARAM_INT);
+				$featured->execute();
+				$featured = $featured->fetchAll();
+			}elseif($category=="Posts"&&$dir=="admin"){
+				//ADMIN GET ALL CATEGORY
+				$queryInfo = "SELECT * FROM posts ORDER BY id DESC";
+
+				$featured = $this->conn->prepare($queryInfo);
+				$featured->setFetchMode(PDO::FETCH_ASSOC);
+				$featured->execute();
+				$featured = $featured->fetchAll();
+			}
+
+			if(empty($featured)){
+				return;
+			}
+
+			$featuredList= array();
+
+			for($i=0; $i<count($featured); $i++){
+				$mediaList = $this->getMedia($featured[$i]['media']);
+
+				if(empty($mediaList)){
+					$mainMedia="assets/img/icon.png";
+					$mediaList=array();
+
+					$mediaListSet=array(
+						'id'=>0,
+						'set_id'=>0,
+						'title'=>'Se7en-Tech',
+						'content'=>$mainMedia,
+						'main'=>1,
+						'dated'=>"2017-06-19"
+					);
+					$mediaList[]=$mediaListSet;
+				}else{
+					foreach($mediaList as $mediaItem){
+						if($mediaItem['main']==1){
+							$mainMedia = $mediaItem['content'];
+						}
+					}
+				}
+
+				$featuredInfo = array(
+					'id' => $featured[$i]['id'],
+					'category' => $featured[$i]['category'],
+					'topic' => $featured[$i]['topic'],
+					'title' => $featured[$i]['title'],
+					'dated' => $featured[$i]['dated'],
+					'content' => $featured[$i]['content'],
+					'media_main' => $mainMedia,
+					'media' => $mediaList,
+					'sources' => $featured[$i]['sources'],
+					'attachment' => $featured[$i]['attachment'],
+					'likes' => $featured[$i]['likes'],
+					'shares' => $featured[$i]['shares'],
+					'active' => $featured[$i]['active']
+				);
+
+				$featuredList[] = $featuredInfo;
+			}
+
+			return json_encode($featuredList);
+
+		}catch(PDOException $e){
+			echo $e->getMessage();
+		}
+  }
+
 /**
   * Get Media
   *
   *
-  **/ 
+  **/
   public function getMedia($mediaSet){
   	try{
   		$queryInfo = "SELECT * FROM media WHERE set_id = :mediaSet ORDER BY id ASC";
 
-		$media = $this->conn->prepare($queryInfo);
+			$media = $this->conn->prepare($queryInfo);
 
-		$media->setFetchMode(PDO::FETCH_ASSOC);
-		$media->bindParam(":mediaSet", $mediaSet, PDO::PARAM_INT);
-		$media->execute();
-		$media = $media->fetchAll();
+			$media->setFetchMode(PDO::FETCH_ASSOC);
+			$media->bindParam(":mediaSet", $mediaSet, PDO::PARAM_INT);
+			$media->execute();
+			$media = $media->fetchAll();
 
-		if(empty($media)){
-			return;
-		}
+			if(empty($media)){
+				return;
+			}
 
-		$mediaList= array();
+			$mediaList= array();
 
-		for($i=0; $i<count($media); $i++){
+			for($i=0; $i<count($media); $i++){
 
-			$mediaInfo = array(
-				'id' => $media[$i]['id'],
-				'set_id' => $media[$i]['set_id'],
-				'title' => $media[$i]['title'],
-				'content' => $media[$i]['content'],
-				'main' => $media[$i]['main'],
-				'dated' => $media[$i]['dated']
-			);
+				$mediaInfo = array(
+					'id' => $media[$i]['id'],
+					'set_id' => $media[$i]['set_id'],
+					'title' => $media[$i]['title'],
+					'content' => $media[$i]['content'],
+					'main' => $media[$i]['main'],
+					'dated' => $media[$i]['dated']
+				);
 
-			$mediaList[] = $mediaInfo;
-		}
+				$mediaList[] = $mediaInfo;
+			}
 
-		return $mediaList;
+			return $mediaList;
   	}catch(PDOException $e){
-		echo $e->getMessage();
-	}
+			echo $e->getMessage();
+		}
   }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	/* CONTROLS */
+	/**
+  *Insert New Inventory
+  *@param $string : The array of new inventory item to be added
+  */
+  public function addNewPost($data){
+
+		if(isset($data['category'])){$category = $data['category'];}else{$category = 1;}
+		if(isset($data['topic'])){$topic = $data['topic'];}else{$topic = "";}
+		if(isset($data['title'])){$title = $data['title'];}else{$title = "";}
+		if(isset($data['content'])){$content = $data['content'];}else{$content = "";}
+		if(isset($data['media'])){$media = $data['media'];}else{$media = 0;}
+		if(isset($data['sources'])){$sources = $data['sources'];}else{$sources = "";}
+		if(isset($data['attachment'])){$attachment = $data['attachment'];}else{$attachment = "";}
+		if(isset($data['active'])){$active = $data['active'];}else{$active = 0;}
+
+    try{
+			$startDate = date("Y-m-d h:i:s");
+
+			$queryInfo = "INSERT INTO posts(category, topic, title, dated, content, media, sources, attachment, likes, shares, active, ordering)VALUES(:category, :topic, :title, :dated, :content, :media, :sources, :attachment, :likes, :shares, :active, :ordering)";
+
+			$this->conn->beginTransaction();
+			$statement = $this->conn->prepare($queryInfo);
+			$statement->execute(array(
+				"category" => $category,
+				"topic" => $topic,
+        "title" => $title,
+				"dated" => $startDate,
+				"content" => $content,
+				"media" => $media,
+				"sources" => $sources,
+				"attachment" => $attachment,
+				"likes" => 0,
+				"shares" => 0,
+				"active" => $active,
+				"ordering" => 0
+			));
+
+
+			$this->conn->commit();
+      return true;
+      exit;
+
+		}catch(PDOException $e){
+			$this->conn->rollback();
+      exit;
+		}
+  }
+
+/**
+	* Update Inventory Edits
+	* @param $itsID - the inventory's key in the DB
+	* @param $dataSet - an array of passed values to be edited
+	* @param $dbTypeOld - The table the inventory is current statused in
+	* @param descript - updates the user record data
+	*
+	*/
+	public function activePost($data){
+		try{
+				$post = $data['id'];
+				$active = $data['active'];
+
+				$masterSet="active=:active";
+
+				//Current table
+				$queryInfo = "UPDATE posts SET $masterSet WHERE id = :id";
+				$statement = $this->conn->prepare($queryInfo);
+				$statement->bindValue(":active", $active);
+				$statement->bindParam(":id", $post, PDO::PARAM_INT);
+				$statement->execute();
+
+			return true;
+		}catch(PDOException $e){
+			echo $e->getMessage();
+			return false;
+		}
+	}
+
+	/**
+		* inventory item Delete
+		* @param $itsID - the inventory item key in the DB
+		* @param $dbCurr - the current status DB of the inventory item
+		* @param descript - deletes a inventory item record from the system
+		*
+		*/
+	public function deletePost($data)
+	{
+		try{
+			$post = $data['id'];
+
+			$queryInfo = "DELETE FROM posts WHERE id = :id";
+			$item = $this->conn->prepare($queryInfo);
+			$item->bindParam(":id", $post, PDO::PARAM_INT);
+			$item->setFetchMode(PDO::FETCH_ASSOC);
+			$item->execute();
+
+			return true;
+		}catch(PDOException $e){
+			return false;
+		}
+	}
+
+
+
+
+
+
+
+
 /**
   * Inventory types
   * @param $userID - the users key in the DB
@@ -659,7 +822,7 @@ class Posts
   */
   public function addNewInventory($inventoryData)
   {
-  
+
   		//master
 		$queryInfo = "SELECT its_id FROM ITS_Inventory ORDER BY its_id DESC LIMIT 1";
 		$inventory = $this->conn->prepare($queryInfo);
@@ -672,9 +835,9 @@ class Posts
 		}else{
 			$itsID = $inventory[0]['its_id'];
 		}
-		
+
 		$itsID = $itsID + 1;
-			
+
     	$item = $inventoryData['item'];
 		$clientID = $inventoryData['client_id'];
     	$descript = $inventoryData['descript'];
@@ -770,9 +933,9 @@ class Posts
 				}else{
 					$itsID = $inventory[0]['its_id'];
 				}
-		
+
 				$itsID = $itsID + 1;
-	    	
+
 				$startDate = date("Y-m-d h:i:s");
 
 				$queryInfo = "INSERT INTO ITS_Inventory(its_id, client_id, part_number, part_name, bin_location, QTY, QTY_recorded, date_entered, variance, incoming_way_bill, serial_number, comments)VALUES(:its_id, :client_id, :part_number, :part_name, :bin_location, :QTY, :QTY_recorded, :date_entered, :variance, :incoming_way_bill, :serial_number, :comments)";
@@ -844,7 +1007,7 @@ class Posts
 			$toCompare = $this->getInventory(null, $itsID, null);
 			$toCompare = json_decode($toCompare, true);
 			$toCompare = $toCompare[0];
-			
+
 			$totalInventoryQTY = $toCompare['QTY'];
 			$totalInventoryQTYrecorded = $toCompare['QTY_recorded'];
 			$totalInventoryQTYordered = $toCompare['QTY_ordered'];
@@ -853,29 +1016,29 @@ class Posts
 			//creates new dataset for comparing
 			$masterDataSet = array();
 			$newDataSet = array();
-			
+
 			if(isset($dataSet['carrier'])){ $newCarrier=$dataSet['carrier']; }else{ $newCarrier=""; }
 			if(isset($dataSet['carrier_tracking'])){ $newCarrierTracking=$dataSet['carrier_tracking']; }else{ $newCarrierTracking=""; }
 			if(isset($dataSet['project_reference'])){ $newProjectRef=$dataSet['project_reference']; }else{ $newProjectRef=""; }
 			if(isset($dataSet['shipping_date'])){ $newShippingDate=$dataSet['shipping_date']; }else{ $newShippingDate=""; }
 			if(isset($dataSet['completed'])){ $newCompleted=$dataSet['completed']; }else{ $newCompleted=""; }
-			
+
 			unset($dataSet['carrier']);
 			unset($dataSet['carrier_tracking']);
 			unset($dataSet['project_reference']);
 			unset($dataSet['shipping_date']);
 			unset($dataSet['completed']);
-			
+
 			foreach($dataSet as $index => $key){
 				if($index >= 5&&$key['name']!="newType"){
 					$newDataSet[$key['name']] = trim((string)$key['value']);
-					
+
 					if(in_Array($key['name'],$toCompare)){
 						$masterDataSet[$key['name']] = trim((string)$toCompare[$key['name']]);
 					}
 				}
 			}
-			
+
 
 			//find the difference (full inventory || single)
 			if($moving!=null){
@@ -902,9 +1065,9 @@ class Posts
 					$minus = 0;
 				}
 			}
-			
+
 			$resultMaster = $result;
-			
+
 
 			/* SET MASTER COLS */
 			$master = "";
@@ -917,13 +1080,13 @@ class Posts
 				}
 				$arrayCount++;
 			}
-			
+
 			unset($resultMaster['carrier']);
 			unset($resultMaster['carrier_tracking']);
 			unset($resultMaster['project_reference']);
 			unset($resultMaster['shipping_date']);
 			unset($resultMaster['completed']);
-			
+
 			$masterSet = "";
 			$arrayCount=0;
 			foreach($resultMaster as $key => $value){
@@ -945,8 +1108,8 @@ class Posts
 			}elseif($moving=="Aging"){
 				$result['QTY_aging'] = $totalInventoryQTYaging + $result['QTY_aging'];
 			}
-			
-			
+
+
 			//STATIC EDIT
 			if($moving==null){
 				$currTable = "ITS_".$dbcurr."";
@@ -954,19 +1117,19 @@ class Posts
 				$queryInfoMASTER = "UPDATE ITS_Inventory SET $masterSet WHERE its_id = :itsID";
 				$statement = $this->conn->prepare($queryInfo);
 				$statementMASTER = $this->conn->prepare($queryInfoMASTER);
-				
+
 					foreach($result as $key => $value){
 						$statement->bindValue(":$key", $value);
-					}	
+					}
 					foreach($resultMaster as $key => $value){
 						$statementMASTER->bindValue(":$key", $value);
-					}	
-					
+					}
+
 				$statementMASTER->bindParam(":itsID", $itsID, PDO::PARAM_INT);
 				$statement->bindParam(":itsID", $itsID, PDO::PARAM_INT);
 				$statementMASTER->execute();
 				$statement->bindParam(":ID", $ID, PDO::PARAM_INT);
- 
+
 				if($dbcurr!="On-Hand"){
 					$updateCurr = $statement->execute();
 				}
@@ -975,34 +1138,34 @@ class Posts
 					//QTY ADJUSTMENTS
 					if($moving=="Receiving"){
 						$result['QTY'] = $totalInventoryQTY - $newDataSet['QTY'];
-						
+
 						$updateQ['QTY'] = $result['QTY'];
-						
+
 						if($updateQ['QTY']<=0){ $updateQ['QTY']=0; }
 					}elseif($moving=="Shipping"){
 						$result['QTY'] = $result['QTY'] - ($totalInventoryQTYordered + $newDataSet['QTY_ordered']);
 						$result['QTY_ordered'] = $totalInventoryQTYordered + $newDataSet['QTY_ordered'];
 						$result['QTY_shipped'] = $totalInventoryQTYordered + $newDataSet['QTY_shipped'];
-						
+
 						$updateQ['QTY'] = $result['QTY'];
 						$updateQ['QTY_ordered'] = $result['QTY_ordered'];
 						$updateQ['QTY_shipped'] = $result['QTY_shipped'];
-						
+
 						if($updateQ['QTY']<=0){ $updateQ['QTY']=0; }
 						if($updateQ['QTY_ordered']<=0){ $updateQ['QTY_ordered']=0; }
 						if($updateQ['QTY_shipped']<=0){ $updateQ['QTY_shipped']=0; }
-						
+
 					}elseif($moving=="Aging"){
 						$result['QTY'] = $result['QTY'] - ($totalInventoryQTYaging + $newDataSet['QTY_aging']);
 						$result['QTY_aging'] = $totalInventoryQTYaging + $newDataSet['QTY_aging'];
-					
+
 						$updateQ['QTY'] = $result['QTY'];
 						$updateQ['QTY_aging'] = $result['QTY_aging'];
-						
+
 						if($updateQ['QTY']<=0){ $updateQ['QTY']=0; }
 						if($updateQ['QTY_aging']<=0){ $updateQ['QTY_aging']=0; }
 					}
-													
+
 					$masterSet="";
 					$arrayCount=0;
 					foreach($updateQ as $key => $value){
@@ -1013,8 +1176,8 @@ class Posts
 						}
 						$arrayCount++;
 					}
-					
-			
+
+
 				//Master table
 				$queryInfoMASTER = "UPDATE ITS_Inventory SET $masterSet WHERE its_id = :itsID";
 				$statementMASTER = $this->conn->prepare($queryInfoMASTER);
@@ -1024,7 +1187,7 @@ class Posts
 				$statementMASTER->bindParam(":itsID", $itsID, PDO::PARAM_INT);
 				$statementMASTER->execute();
 
-				
+
 				//sets the QTY update for the respective table
 				if($dbcurr=="Shipping"){
 					$masterSet="QTY_ordered=:QTY_ordered,QTY_shipped=:QTY_shipped";
@@ -1033,13 +1196,13 @@ class Posts
 				}else{
 					$masterSet="QTY=:QTY";
 				}
-				
-				
+
+
 				//Current table
 				$currTable = "ITS_".$dbcurr."";
 				$queryInfo = "UPDATE $currTable SET $masterSet WHERE its_id = :itsID && ID = :ID";
 				$statement = $this->conn->prepare($queryInfo);
-				
+
 				if($dbcurr=="Shipping"){
 					$statement->bindValue(":QTY_ordered", $updateQ['QTY_ordered']);
 					$statement->bindValue(":QTY_shipped", $updateQ['QTY_shipped']);
@@ -1051,12 +1214,12 @@ class Posts
 
 				$statement->bindParam(":itsID", $itsID, PDO::PARAM_INT);
 				$statement->bindParam(":ID", $ID, PDO::PARAM_INT);
-				
+
 				if($dbcurr!="On-Hand"){
 					$updateCurr = $statement->execute();
 				}
 			}
-			
+
 				if($dbcurr == "Shipping"){
 					$delQTY = $result['QTY_ordered'];
 				}elseif($dbcurr == "Aging"){
@@ -1064,7 +1227,7 @@ class Posts
 				}else{
 					$delQTY = $result['QTY'];
 				}
-			
+
 				//Delete record
 				$del = $this->deleteInventoryItem($ID, $itsID, $dbcurr, null, $delQTY);
 			echo true;
@@ -1178,20 +1341,20 @@ class Posts
 		try{
 			$QTY=$qty;
 			$multiTableCheck = $this->checkMasterQTY($itsID, $dbCurr, $QTY);
-			
+
 			/*echo $QTY.'\n';
 			echo $dbCurr.'\n';
 			echo $manually.'\n';
 			echo $ID.'\n';
 			echo $dbCurr.'\n';*/
-			
+
 			if($dbCurr=="On-Hand"){
 				$dbCurr = "ITS_Inventory";
 			}else{
-				$dbCurr = "ITS_".$dbCurr;			
+				$dbCurr = "ITS_".$dbCurr;
 			}
-			
-			
+
+
 			if($dbCurr=="ITS_Shipping"){
 				$col = "QTY_ordered";
 			}elseif($dbCurr=="ITS_Aging"){
@@ -1228,7 +1391,7 @@ class Posts
 							$item->execute();
 						}
 					}
-				}else{		
+				}else{
 					if($dbCurr=="ITS_Inventory"){
 						$queryInfoRECEIVING = "UPDATE ITS_Receiving SET QTY = QTY - :QTY WHERE its_id = :itsID && id = :ID";
 						$itemRECEIVING = $this->conn->prepare($queryInfoRECEIVING);
@@ -1248,19 +1411,19 @@ class Posts
 						if(empty($inventory)){ return; }
 
 						$chkList= array();
-						
-						
+
+
 						$chkList['QTY'] = $inventory[0]['QTY'];
 						$chkList['QTY_recorded'] = $inventory[0]['QTY_recorded'];
 						$chkList['QTY_discarded'] = $inventory[0]['QTY_discarded'];
 						$chkList['QTY_aging'] = $inventory[0]['QTY_aging'];
 						$chkList['QTY_ordered'] = $inventory[0]['QTY_ordered'];
-						$chkList['QTY_shipped'] = $inventory[0]['QTY_shipped'];		
-					
+						$chkList['QTY_shipped'] = $inventory[0]['QTY_shipped'];
+
 						if($chkList[$col]==$QTY){
 							$QTY = 0;
-						}		
-					
+						}
+
 						if($QTY<1){
 							$queryInfo = "DELETE FROM $dbCurr WHERE its_id = :itsID && id = :ID";
 							$item = $this->conn->prepare($queryInfo);
@@ -1279,7 +1442,7 @@ class Posts
 						}
 					}
 				}
-		
+
 			}else{
 				if($multiTableCheck==1){
 					if($dbCurr=="ITS_Inventory"){
@@ -1335,7 +1498,7 @@ class Posts
 					$item->execute();
 				}
 			}else{
-				if($manually!=null){	
+				if($manually!=null){
 					$queryInfo = "SELECT * FROM ITS_Inventory WHERE its_id = :its_id ORDER BY its_id DESC LIMIT 1";
 					$inventory = $this->conn->prepare($queryInfo);
 					$inventory->bindParam(":its_id", $itsID, PDO::PARAM_INT);
@@ -1344,43 +1507,43 @@ class Posts
 					$inventory = $inventory->fetchAll();
 
 					if(empty($inventory)){ return; }
-					
+
 					$chkList= array();
-									
+
 					$chkListQTY = $inventory[0]['QTY'];
 					$chkListRecorded = $inventory[0]['QTY_recorded'];
 					$chkList['QTY_discarded'] = $inventory[0]['QTY_discarded'];
 					$chkList['QTY_aging'] = $inventory[0]['QTY_aging'];
 					$chkList['QTY_ordered'] = $inventory[0]['QTY_ordered'];
-	
-	
+
+
 					$summed = array_sum($chkList);
-					
-				
+
+
 					if($chkListQTY==0&&$chkListRecorded==($summed+$QTY)){
 						$queryInfo = "DELETE FROM ITS_Inventory WHERE its_id = :itsID";
 						$item = $this->conn->prepare($queryInfo);
 						$item->bindParam(":itsID", $itsID, PDO::PARAM_INT);
 						$item->setFetchMode(PDO::FETCH_ASSOC);
-						$item->execute();	
-					}else{			
-					
+						$item->execute();
+					}else{
+
 						if($chkListQTY<1){
 							$QTYdiscarded = $QTY;
 							$QTY = 0;
 						}else{
 							$QTYdiscarded = $QTY;
 						}
-	
-					
+
+
 						if($dbCurr=="ITS_Aging"){
-							$queryInfoUpdate = "UPDATE ITS_Inventory SET QTY = QTY - :QTY, QTY_discarded = QTY_discarded + :QTYdiscarded, QTY_aging = QTY_aging - :QTYdiscarded WHERE its_id = :itsID";	
+							$queryInfoUpdate = "UPDATE ITS_Inventory SET QTY = QTY - :QTY, QTY_discarded = QTY_discarded + :QTYdiscarded, QTY_aging = QTY_aging - :QTYdiscarded WHERE its_id = :itsID";
 						}elseif($dbCurr=="ITS_Shipping"){
 							$queryInfoUpdate = "UPDATE ITS_Inventory SET QTY = QTY - :QTY, QTY_discarded = QTY_discarded + :QTYdiscarded, QTY_ordered = QTY_ordered - :QTYdiscarded, QTY_shipped = QTY_shipped - :QTYdiscarded WHERE its_id = :itsID";
 						}else{
 							$queryInfoUpdate = "UPDATE ITS_Inventory SET QTY = QTY - :QTY, QTY_discarded = QTY_discarded + :QTYdiscarded WHERE its_id = :itsID";
 						}
-					
+
 						$statement = $this->conn->prepare($queryInfoUpdate);
 						$statement->bindParam(":itsID", $itsID, PDO::PARAM_INT);
 						$statement->bindParam(":QTY", $QTY, PDO::PARAM_INT);
@@ -1395,7 +1558,7 @@ class Posts
 			echo false;
 		}
 	}
-	
+
 /*completed inventory*/
   public function markCompleted($ID, $itsID)
   {

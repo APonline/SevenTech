@@ -134,7 +134,7 @@ h6 {
   width: 50%;
   height: 100vh;
   overflow: hidden; }
-  
+
   #leftSideShort {
   position: relative;
   top: 0;
@@ -142,7 +142,7 @@ h6 {
   width: 25%;
   height: 100vh;
   overflow: hidden; }
-  
+
   #leftSideTop {
   position: relative;
   top: 0;
@@ -159,7 +159,7 @@ h6 {
   height: 100%;
   overflow-x: hidden;
   background: #fff; }
-  
+
 #rightSideShort {
   position: absolute;
   top: 0;
@@ -168,7 +168,7 @@ h6 {
   height: 100%;
   overflow-x: hidden;
   background: #fff; }
-  
+
 #rightSideTop {
   position: absolute;
   top: 35vh;
@@ -238,7 +238,7 @@ h6 {
       display: inline-block;
       padding: 15px; }
       .social_icons li i:hover, #homeCenter .social_icons li i:hover {
-        color: #b50000;
+        color: #2295c7;
         transition: .1s; }
 
 #homeCenter .social_icons {
@@ -362,7 +362,7 @@ h6 {
 /* ------------------------------------- */
 .project, .portfolio, .swipe_portfolio {
   position: relative;
-  padding: 15px 7.5px; 
+  padding: 15px 7.5px;
   /*height: calc(100% - 288px);*/
   }
 .blog {
@@ -417,7 +417,7 @@ h6 {
         -moz-transition: 0.3s;
         -o-transition: 0.3s;
         transition: 0.3s; }
-        
+
       .blog .project .item .caption .photo-details {
         position: absolute;
         padding: 0 15px;
@@ -463,7 +463,7 @@ h6 {
       -moz-transform: translateY(-70px);
       -o-transform: translateY(-70px);
       transform: translateY(-70px); }
-      
+
     .blog .project .item:hover .caption {
       -webkit-transform: translateY(0px);
       -ms-transform: translateY(0px);
@@ -1499,20 +1499,21 @@ img {
     line-height: 1.6; } }
 @media only screen and (max-width: 1600px) {
   .instagram_feed li {
-    width: 33.33% !important; } }
+    width: 33.33% !important; } 
+}
 @media only screen and (max-width: 1024px) {
   #leftSide {
     position: relative;
     top: 0;
     left: 0;
     width: 100%; }
-    
+
   #leftSideShort {
     position: relative;
     top: 0;
     left: 0;
     width: 100%; }
-    
+
   #leftSideTop {
     position: relative;
     top: 0;
@@ -1532,7 +1533,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%; }
-    
+
   #rightSideTop {
     position: relative;
     top: 35vh;
@@ -1584,7 +1585,7 @@ img {
     width: 100%;
     height: 100%;
     overflow: hidden; }
-    
+
   #leftSideShort {
     position: relative;
     top: 0;
@@ -1592,7 +1593,7 @@ img {
     width: 100%;
     height: 100%;
     overflow: hidden; }
-    
+
   #leftSideTop {
     position: relative;
     top: 0;
@@ -1610,7 +1611,7 @@ img {
     overflow: scroll;
     background: transparent;
     overflow-x: hidden; }
-    
+
   #rightSideShort {
     position: relative;
     top: 35vh;
@@ -1620,7 +1621,7 @@ img {
     overflow: scroll;
     background: transparent;
     overflow-x: hidden; }
-    
+
   #rightSideTop {
     position: relative;
     top: 0;

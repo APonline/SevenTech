@@ -7,7 +7,7 @@ echo "
   <div id='home' class='gradient'>
 		<img src='assets/img/se7en-logo.png' alt='' class='main-logo' />
 	<div class='h-content'>
-	  <h1><span class='accent-title black'>Custom FX!</span><br> Take creative control</h1>
+	  <h1><span class='accent-title black'>Take creative control</span></h1>
 	  <p>Having great effects pedals in your rig is one thing, making the most of controlling them takes things to another level.</p>
 	</div>
 

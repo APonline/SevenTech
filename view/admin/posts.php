@@ -7,7 +7,7 @@ echo "
 <div class='project'>
 	<h1>".strtoupper($page)."</h1>
 
-	".$featuredCard."
+	".$postCard."
 </div>
 ";
 

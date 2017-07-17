@@ -1,7 +1,9 @@
 <?php
 
-require "inc/config.php";
+//Set DIR
+$dir = "/Se7enTech/dev/web.Se7enTech";
+$GLOBALS['dir'] = $dir;
 
-require_once(__DIR__."/template/footer.php");
+include "inc/config.php";
 
- ?>
+?>

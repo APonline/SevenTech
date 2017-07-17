@@ -38,7 +38,7 @@ class LS
       /**
        * MySQL options
        */
-      "host" => "dev.its.matthewsullivan.media",
+      "host" => "mysql.se7en-tech.com",
       "port" => 3306,
 
       /**
@@ -46,10 +46,10 @@ class LS
        */
       "sqlite_path" => "",
 
-      "username" => "socreativeteam",
-      "password" => "sM5AayLMvkXPTv2XGu",
+      "username" => "apanemia",
+      "password" => "milkmilk1",
 
-      "name" => "its_tracelogix",
+      "name" => "se7entecheffects",
       "table" => "users",
       "token_table" => "resetTokens"
     ),

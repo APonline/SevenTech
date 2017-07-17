@@ -1,14 +1,21 @@
 <?php
+$dir = $GLOBALS['dir'];
+$nav = $GLOBALS['nav'];
+$active = $GLOBALS['active'];
+
 	echo "
 	<nav>
 		<ul>
-			<li><a href='home'><img src='assets/img/se7en-logo-W.png' alt='' width='60' style='margin-top: -3px;' /></a></li>
+			<li><a href='home'><img src='".$dir."/assets/img/icon.png' alt='' width='40' style='margin-top: -3px;' /></a></li>
 			";
 			for($x=0; $x<count($nav); $x++){
-				if($active==$nav[$x]){
-					echo "<li><a href='".$nav[$x]."' class='active'>".$nav[$x]."</a></li>";
+				$pageCurr = $nav[$x]['url'];
+
+				if($active==$pageCurr){
+					$GLOBALS['page'] = $nav[$x]['name'];
+					echo "<li><a href='".$nav[$x]['url']."' class='active'>".$nav[$x]['name']."</a></li>";
 				}else{
-					echo "<li><a href='".$nav[$x]."'>".$nav[$x]."</a></li>";
+					echo "<li><a href='".$nav[$x]['url']."'>".$nav[$x]['name']."</a></li>";
 				}
 			}
 	echo "</ul>

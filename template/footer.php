@@ -1,4 +1,5 @@
 <?php
+$dir = $GLOBALS['dir'];
 
 echo "
 	<div class='pricing graybk'>
@@ -34,21 +35,20 @@ echo "
 
 	</div>
 	</section>
-      <script src='assets/js/lib/jquery-1.11.3.min.js'></script>
-      <script src='assets/js/lib/bootstrap.min.js'></script>
-      <script src='assets/js/lib/animsition.min.js'></script>
-      <script src='assets/js/lib/jquery.magnific-popup.min.js'></script>
-      <script src='assets/js/lib/jquery.countdown.min.js'></script>
-      <script src='assets/js/lib/twitterFetcher_min.js'></script>
-      <script src='assets/js/lib/masonry.pkgd.min.js'></script>
-      <script src='assets/js/lib/imagesloaded.pkgd.min.js'></script>
-      <script src='assets/js/lib/jquery.flexslider-min.js'></script>
-      <script src='assets/js/lib/photoswipe.min.js'></script>
-      <script src='assets/js/lib/photoswipe-ui-default.min.js'></script>
-      <script src='assets/js/lib/jqinstapics.min.js'></script>
-      <script src='assets/js/lib/script.js'></script>
-      
-      <script src='assets/js/common/main.js'></script>
+      <script src='".$dir."/assets/js/lib/jquery-1.11.3.min.js'></script>
+      <script src='".$dir."/assets/js/lib/bootstrap.min.js'></script>
+      <script src='".$dir."/assets/js/lib/animsition.min.js'></script>
+      <script src='".$dir."/assets/js/lib/jquery.magnific-popup.min.js'></script>
+      <script src='".$dir."/assets/js/lib/jquery.countdown.min.js'></script>
+      <script src='".$dir."/assets/js/lib/twitterFetcher_min.js'></script>
+      <script src='".$dir."/assets/js/lib/masonry.pkgd.min.js'></script>
+      <script src='".$dir."/assets/js/lib/imagesloaded.pkgd.min.js'></script>
+      <script src='".$dir."/assets/js/lib/jquery.flexslider-min.js'></script>
+      <script src='".$dir."/assets/js/lib/photoswipe.min.js'></script>
+      <script src='".$dir."/assets/js/lib/photoswipe-ui-default.min.js'></script>
+      <script src='".$dir."/assets/js/lib/jqinstapics.min.js'></script>
+      <script src='".$dir."/assets/js/lib/script.js'></script>
+      <script src='".$dir."/assets/js/common/main.js'></script>
   </body>
 </html>
 ";

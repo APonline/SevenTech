@@ -6,7 +6,6 @@ class DatabaseConnection
     private $conn = null;
 
     function connectDB(){
-//208.97.173.114
         try {
 
             $this->conn = new PDO("mysql:host=208.97.173.114;dbname=se7entecheffects", "apanemia", "milkmilk1");

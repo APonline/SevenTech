@@ -1,56 +1,64 @@
-/*****************/	
+/*****************/
 /*reset*/
-	h5{font-weight:bold;}
+	h5,b{font-weight:bold;}
+	h1,h5{font-family: 'Oswald', sans-serif;}
 /*reset*/
 /*****************/
 
-/*****************/	
+/*****************/
+/*login*/
+	.loginBox{padding: 40px 0;}
+/*login*/
+/*****************/
+
+/*****************/
 /*COLOURS*/
 	.black{color:#000!important;}
-	.red{color:#b50000!important;}
-	.redbk{background-color:#b50000!important;}
-	.redbkSolid{background-color:#b50000!important;}
+	.red{color:#2295c7!important;}
+	.redbk{background-color:#2295c7!important;}
+	.redbkSolid{background-color:#2295c7!important;}
 	.redbk:hover{background-color:#8a8a8a!important;}
 	.gray{color:#8a8a8a!important;}
 	.graybk{background-color:#8a8a8a!important;}
+	.bluebk{background-color:#2295c7!important;}
 /*COLOURS*/
-/*****************/	
+/*****************/
 
 
-/********************/	
+/********************/
 /*MAIN PANEL*/
-	#home{ background:linear-gradient(to bottom, rgba(180, 180, 180, 0.9) 0%, rgba(0, 0, 0, 0.1) 100%), url('../../img/banner1.png') 50% 50% / cover no-repeat; }
-	.productsBanner{ background:linear-gradient(to bottom, rgba(180, 180, 180, 0.9) 0%, rgba(0, 0, 0, 0.1) 100%), url('../../img/blog5.JPG') 50% 50% / cover no-repeat!important; }
+	#home{ background:linear-gradient(to bottom, rgba(2, 69, 112, 0.9) 0%, rgba(0, 0, 0, 0.1) 100%), url('../../img/banner1.png') 50% 50% / cover no-repeat; }
+	.productsBanner{ background:linear-gradient(to bottom, rgba(2, 69, 112, 0.9) 0%, rgba(0, 0, 0, 0.1) 100%), url('../../img/banner1.png') 50% 50% / cover no-repeat!important; }
 	.grid { top: 0px;width: 100vw;height: 100vh;position: fixed;box-shadow: rgb(0, 0, 0) 0px 0px 60px inset;background-image: url('../../img/gridtile.png'); }
-	.accent-title{ font-weight:bold; text-transform: uppercase; }
+	.accent-title{ font-weight:bold; text-transform: uppercase;text-shadow:0px 0px 9px #ffffff; }
 	.main-logo { position: absolute; top: 16%; max-width: 300px; left: 10%; }
-	
+
 	.screen{visibility:none;display:none;position:fixed;top:0px;left:0px;width:100%;height:100%;background:rgba(0,0,0,.5);cursor:pointer;z-index: 2;}
 /*MAIN PANEL*/
 /********************/
 
-/********************/	
+/********************/
 /*CONTENT PANEL*/
 	#rightSide, #rightSideShort{padding-top: 52px;}
-	.projectTitle{padding: 0 10%;color: #fff;font-weight: bold;background-color:#b50000!important;margin-bottom: 0px;}
+	.projectTitle{padding: 0 10%;color: #fff;font-weight: bold;background-color:#2295c7!important;margin-bottom: 0px;}
 /*CONTENT PANEL*/
 /********************/
 
 
-/********************/	
+/********************/
 /*NAVIGATION*/
 	nav{background-color: #000;position: fixed;z-index: 1;width: 100vw;}
 	nav ul{}
 		nav ul li{cursor:pointer;display:inline-block;padding:6px 10px;}
 		nav ul li:first-child{border-right: 1px solid #fff;margin: 12px 0;padding: 0px 15px;}
-		nav ul li a:hover, nav ul li a.active{color:#b50000;}
-	
+		nav ul li a:hover, nav ul li a.active{color:#2295c7;}
+
 /*NAVIGATION*/
 /********************/
 
 .clear{clear: both;margin-bottom: 15px;}
 
-.projectImgContainer{overflow:hidden;max-height: 50vh;}
+.projectImgContainer{overflow:hidden;max-height: 50vh;text-align: center;}
 .blog .projectImgContainer{overflow:hidden;height: auto;}
 
 .project_content{}
@@ -60,12 +68,12 @@
 
 
 
-/********************/	
+/********************/
 /*GALLERY*/
 	.gallerySet{position:relative;display:block;clear:both;margin:0 auto;margin-bottom: 25px;border: 1px solid #8a8a8a;min-height:100px;height:auto;width:100%;clear:both;}
 	.gallerySet ul{position:relative;display:block;width:100%;height:100px;clear:both;}
 	.gallerySet ul li{width: 100px!important;height: 100px!important;position: relative;display: inline-block!important;float: left;cursor: pointer;border: 5px solid #fff;border-right: none;overflow: hidden;}
-	
+
 		.gallerySet ul li a figure img{width: 220%!important;height: 220%!important;max-width: 1000%!important;max-height: 1000%!important;left: -50%!important;position: relative;}
 /*GALLERY*/
 /********************/
@@ -85,3 +93,40 @@
 	.main-logo { margin-top: 10%; }
 	.h-content {position: relative;z-index: 0;top: 42.7vh;}
 }
+
+
+
+/*ADMIN*/
+.admin, .admin .animsition{height: 100%;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    float: left;
+    clear: both;}
+
+.admin .project{height: auto;min-height: 100vh;width: 80vw;margin-left: 20%;float: left;padding: 25px;display: block;position: relative;}
+
+.admin nav{background-color: #000;position: fixed;z-index: 1;min-height: 100vh;height:100%;width: 20vw;float: left;display: block;}
+	.admin nav ul{}
+		.admin nav ul li{width:100%;cursor:pointer;display:block;padding:10px 25px;float:left;}
+		.admin nav ul li:first-child{text-align:center;border-right:none;border-bottom: 1px solid #fff;margin: 12px 0;padding: 10px 15px;margin-top:0px!important;}
+		.admin nav ul li button img:first-child{width:160px;}
+		.admin nav ul li button:hover, nav ul li button.active{color:#2295c7;}
+
+/*CONTROLS*/
+.adminLink{color:#000;}
+.drop-down{color:#000;width:150px;float: right;font-family: 'Oswald', sans-serif;position: relative;display: inline-block;}
+/*CONTROLS*/
+
+	/*POSTS*/
+	.tag{color:#fff;font-family: 'Oswald', sans-serif;position:absolute;right:0px;display:inline-block;width:auto;height:auto;padding:12px 20px;}
+	.post-listing{width: 100%;height: 220px;display: block;position: relative;margin-bottom: 10px;padding: 20px;border: 1px solid #000;border-radius: 5px;background-color: #fff;}
+	.post-listing .item-thumb-image{float: left;display: inline-block;position: relative;width: 150px;height: 150px;border: 5px solid #000;border-bottom-right-radius: 50px;overflow: hidden;}
+		.post-listing .item-thumb-image img{height: 100%;width: 100%;}
+	.post-listing .item-thumb-meta{float:left;display:inline-block;position:relative;width:auto;height:150px;padding: 0 20px;line-height: 17px;}
+	.post-listing .item-menu-buttons{color:#fff;float: left;display: inline-block;position: relative;height: 33px;line-height: 8px;padding: 5px 0;clear: both;}
+	.post-listing .item-menu-buttons button{padding: 8px 10px;float:left;display:inline-block;position:relative;margin-right:5px;cursor:pointer;}
+				  .item-menu-buttons{color: #fff;display: block;position: relative;height: 60px;width: 100%;line-height: 8px;padding: 5px 0;clear: both;}
+				  .item-menu-buttons button{padding: 13px 18px;float:left;display:inline-block;position:relative;margin-right:5px;cursor:pointer;}
+	/*POSTS*/
+/*ADMIN*/
